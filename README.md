@@ -37,6 +37,8 @@ By completing the tasks, you will gain the confidence and baseline skill set req
 
 Each task appears as a **GitHub Issue**.
 
+> 🧭 **Navigating the issues:** open the **Issues** tab and switch to the **Milestones** view to see tasks grouped by area. Work through the milestones **in order** (they build on each other), and use the filter bar to filter by milestone, label, or assignee. **Close each issue once you've completed it and attached your deliverables** so your mentor knows it's ready for review — reviews happen on closed issues.
+
 Inside each issue, you will find:
 
 - **Task name**  

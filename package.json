@@ -1,0 +1,27 @@
+{
+  "name": "onboarding-mac-developer",
+  "version": "1.0.0",
+  "description": "This repository tracks my progress as a **macOS Developer Intern** at Focus Bear.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Krisha190235/onboarding-mac-developer.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Krisha190235/onboarding-mac-developer/issues"
+  },
+  "homepage": "https://github.com/Krisha190235/onboarding-mac-developer#readme",
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "eslint": "^10.7.0",
+    "globals": "^17.7.0",
+    "prettier": "^3.9.5"
+  }
+}

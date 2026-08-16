@@ -31,6 +31,7 @@ Profile the CPU and the memory separately; each numbered step is one observation
 (and a good screenshot).
 
 ### A. CPU — Time Profiler
+
 1. In Xcode: **Product → Profile (⌘I)**. When Instruments opens, choose
    **Time Profiler**, then press the red **record** button.
 2. In the running app, click **Run CPU Work** a few times.
@@ -41,6 +42,7 @@ Profile the CPU and the memory separately; each numbered step is one observation
    → *Screenshot: the Time Profiler timeline + call tree with `runCPUWork` highlighted.*
 
 ### B. Memory — Allocations
+
 1. Stop the previous run. **Product → Profile (⌘I)** again → choose
    **Allocations** → record.
 2. Note the baseline footprint. Click **Allocate ~80 MB** two or three times and
@@ -58,8 +60,9 @@ Numbers below are from my actual runs (Time Profiler run = 29 s,
 Allocations run = 23 s).
 
 ### CPU (Time Profiler)
+
 | Metric | Value |
-|---|---|
+| --- | --- |
 | Total sampled CPU time in run | 664 ms (100%) |
 | Main Thread | 424 ms (63.9%) |
 | Background worker thread running `runCPUWork` | 173 ms (26.1%) |
@@ -75,8 +78,9 @@ so the UI stays responsive throughout. Ticking *Invert Call Tree* +
 loop inside `runCPUWork()` — the true hot path.
 
 ### Memory (Allocations)
+
 | Metric | Value |
-|---|---|
+| --- | --- |
 | Persistent (live) at end of run — All Heap & Anonymous VM | 22.85 MiB |
 | Total bytes allocated over the run | 425.70 MiB |
 | Live vs. transient allocations | 55,678 persistent / 213,931 transient |
@@ -91,6 +95,7 @@ the held array was cleared. The footprint returning toward baseline (rather than
 staying elevated) is the signal that there is no leak.
 
 ## Takeaways
+
 - Time Profiler answers *"what is my app spending CPU on?"* — the call tree
   isolates the hot function fast once system libraries are hidden.
 - Allocations answers *"what is holding memory?"* — persistent bytes rising and

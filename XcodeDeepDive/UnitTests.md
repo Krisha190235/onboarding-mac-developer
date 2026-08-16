@@ -10,7 +10,7 @@ The testable logic was extracted out of the View into a `Counter` struct and a
 `Workload` enum in `ContentView.swift`, so it can be tested with no UI:
 
 | # | Test | What it verifies |
-|---|---|---|
+| --- | --- | --- |
 | 1 | `incrementIncreasesCount` | `increment()` raises `count` by 1 |
 | 2 | `doubledIsTwiceCount` | `doubled` equals `count * 2` |
 | 3 | `historyRecordsEachIncrement` | each increment is appended to `history` in order |

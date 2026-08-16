@@ -17,7 +17,7 @@ you want visible outside the package has to be explicitly marked `public` —
 which is the main practical difference from just having files in your app target.
 
 | | Framework (`.framework`) | Swift Package |
-|---|---|---|
+| --- | --- | --- |
 | Described by | Xcode target settings | `Package.swift` manifest, in source control |
 | Dependencies | added manually | resolved by SPM, pinned in `Package.resolved` |
 | Shared between projects | copy the binary, or a workspace | point at a folder or a git URL |
@@ -39,7 +39,7 @@ pinning instead, but wouldn't teach me anything about `Package.swift`.
 
 ## The package
 
-```
+```text
 CounterKit/
 ├── Package.swift                       # manifest: product + 2 targets
 ├── Sources/CounterKit/
@@ -95,7 +95,7 @@ or below the app's deployment target, otherwise the app won't link it.
 The package has its own test target, so the logic is covered from two directions:
 
 | Where | Tests | How to run |
-|---|---|---|
+| --- | --- | --- |
 | `CounterKitTests` | 4 — empty counter, history length, reuse after reset, `sqrtSum` bounds | `swift test` in the CounterKit folder, or the Test Navigator |
 | `HelloAppTests` | 6 (from 7.6) — the app's use of the package | ⌘U in Xcode |
 

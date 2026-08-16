@@ -23,7 +23,7 @@ off to delete. The **Breakpoint Navigator** (⌘8) lists them all. Useful varian
 console at the bottom (the `(lldb)` prompt) accepts commands. The ones I used:
 
 | Command | Shortcut | What it does |
-|---|---|---|
+| --- | --- | --- |
 | `po <expr>` | print-object | Prints the object description of an expression |
 | `p <expr>` / `print` | — | Prints a value with its type |
 | `expression count = 10` | `e` | Evaluates / **changes** a variable live |
@@ -50,18 +50,22 @@ Do this in order; each numbered step is one screenshot.
    pauses on line 36 and the line highlights green.
    → *Screenshot 2: paused at the breakpoint, debug area visible.*
 4. In the `(lldb)` console, run these and let the output show:
-   ```
+
+   ```lldb
    po count
    p count
    frame variable
    bt
    ```
+
    → *Screenshot 3: the LLDB console with these commands and their output.*
 5. **Change a value live**, then keep going:
-   ```
+
+   ```lldb
    expression count = 41
    continue
    ```
+
    The UI now shows `Count: 42` after the next increment — proof you edited state
    from LLDB.
    → *Screenshot 4 (optional): the running app reflecting the LLDB-modified value.*

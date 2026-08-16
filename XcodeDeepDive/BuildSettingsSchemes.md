@@ -23,7 +23,7 @@ distribution (or ⌘I to Profile) gives you a Release build.
 ## Debug vs Release — the settings that actually differ
 
 | Build setting | Debug | Release | Why it matters |
-|---|---|---|---|
+| --- | --- | --- | --- |
 | `SWIFT_OPTIMIZATION_LEVEL` | `-Onone` (no optimization) | `-O` (optimized, default for Release) | Release code runs faster; Debug keeps code straightforward so the debugger maps cleanly to source. |
 | `SWIFT_COMPILATION_MODE` | incremental (default) | `wholemodule` | Release compiles the whole module together for better cross-function optimization; Debug compiles per-file for faster incremental builds. |
 | `GCC_OPTIMIZATION_LEVEL` (C/Obj-C) | `0` | default (optimized) | Same idea for any C/Obj-C code. |

@@ -26,7 +26,13 @@ public struct Endpoint<Response>: Sendable {
     public var decode: @Sendable (Data) throws -> Response
 }
 
-public extension Endpoint where Response: Decodable {
+// `SendableMetatype` is the constraint the compiler wants here. `decode` is a
+// @Sendable closure, so it captures `Response.self` — a metatype — and crossing
+// an isolation boundary with a metatype is only safe if the type can't be a
+// generic parameter smuggling in something non-Sendable. Every concrete type
+// conforms implicitly, so this changes nothing at the call site; without it,
+// Swift 6.2 warns about the capture.
+public extension Endpoint where Response: Decodable & SendableMetatype {
     static func get(_ path: String, query: [String: String] = [:]) -> Endpoint {
         Endpoint(method: .get, path: path, query: query, body: nil) { data in
             try JSONDecoder().decode(Response.self, from: data)

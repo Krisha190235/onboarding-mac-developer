@@ -113,6 +113,19 @@ there's nowhere to inject anything and the handler has to be global. That's
 Without it, two tests set the handler and one receives the other's response —
 an intermittent failure that looks exactly like a networking bug.
 
+A third showed up in the source rather than the tests. `Endpoint.decode` is a
+`@Sendable` closure, so it captures `Response.self` — a *metatype* — and Swift 6.2
+warns unless the generic parameter is constrained:
+
+```swift
+public extension Endpoint where Response: Decodable & SendableMetatype
+```
+
+Every concrete type conforms implicitly, so nothing changes at the call site. The
+constraint exists to stop a generic parameter smuggling a non-Sendable type across
+an isolation boundary inside a metatype, which is not a sentence I could have
+written a week ago.
+
 ## What about mocky.io
 
 jsonplaceholder can't return a 500, a truncated body, or a 10-second response, so

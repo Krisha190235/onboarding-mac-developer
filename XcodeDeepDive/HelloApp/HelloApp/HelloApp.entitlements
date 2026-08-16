@@ -2,15 +2,56 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<!-- 8.2 Permission Request App -->
+	<!--
+	  HelloApp entitlements  -  8.4 Sandbox Entitlements
+
+	  Every key here is one the app actually uses. Entitlements are a
+	  least-privilege list, not a wish list: each one widens the sandbox, and
+	  anything unused is pure attack surface (and an App Review question).
+
+	  To verify what actually shipped, dump the entitlements back out of the
+	  signature with codesign (see macOSPermissions/SandboxEntitlements.md).
+
+	  Note: XML comments cannot contain a double hyphen, so command-line
+	  flags are described rather than pasted in here.
+	-->
+
+	<!-- Turn the sandbox on. Without this the rest of the file is meaningless.
+	     Mandatory for the Mac App Store; optional but recommended for
+	     Developer ID distribution. -->
 	<key>com.apple.security.app-sandbox</key>
 	<true/>
+
+	<!-- Read files the user picks in an open panel. Access is granted by
+	     Powerbox at the moment of choosing, per file, and is gone on relaunch
+	     unless the app also stores a security-scoped bookmark. -->
 	<key>com.apple.security.files.user-selected.read-only</key>
 	<true/>
-	<!-- Sandboxed apps need these before TCC will even offer the prompt. -->
+
+	<!-- 8.2 Permission Request App: the camera demo.
+	     The sandbox has to allow the hardware before TCC will even offer the
+	     prompt, and Info.plist must carry NSCameraUsageDescription. -->
 	<key>com.apple.security.device.camera</key>
 	<true/>
+
+	<!-- 8.2 Permission Request App: the Contacts demo.
+	     Pairs with NSContactsUsageDescription. -->
 	<key>com.apple.security.personal-information.addressbook</key>
 	<true/>
+
+	<!--
+	  Deliberately NOT requested, because HelloApp doesn't do these things:
+
+	  com.apple.security.network.client          outgoing connections
+	  com.apple.security.network.server          listening sockets
+	  com.apple.security.files.user-selected.read-write
+	  com.apple.security.files.downloads.read-write
+	  com.apple.security.files.bookmarks.app-scope   persistent file access
+	  com.apple.security.device.audio-input      microphone
+	  com.apple.security.personal-information.calendars
+	  com.apple.security.personal-information.location
+	  com.apple.security.print
+	  com.apple.security.application-groups      sharing with helpers/extensions
+	-->
 </dict>
 </plist>

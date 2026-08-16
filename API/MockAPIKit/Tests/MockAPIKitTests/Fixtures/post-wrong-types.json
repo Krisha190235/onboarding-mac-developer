@@ -1,0 +1,6 @@
+{
+  "userId": 1,
+  "id": "1",
+  "title": "an id quoted as a string - the single most common real-world shape break",
+  "body": "valid JSON, valid status code, model still can't decode it"
+}

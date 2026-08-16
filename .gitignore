@@ -4,3 +4,6 @@ node_modules/
 # Xcode
 xcuserdata/
 *.xcuserstate
+
+# Swift Package Manager
+.build/

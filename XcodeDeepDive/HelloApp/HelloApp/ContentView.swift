@@ -11,6 +11,9 @@ struct ContentView: View {
     @State private var isWorking = false
     @State private var blocks: [[Int]] = []   // held memory, visible in Allocations
 
+    // Permissions sheet (8.2)
+    @State private var showingPermissions = false
+
     var body: some View {
         VStack(spacing: 16) {
             Image(systemName: "ladybug.fill")
@@ -51,9 +54,28 @@ struct ContentView: View {
             Text("Held blocks: \(blocks.count)")
                 .font(.footnote)
                 .monospacedDigit()
+
+            Divider()
+
+            // --- 8.2 Permission Request App ---
+            Button("Permissions…") {
+                showingPermissions = true
+            }
         }
         .padding()
-        .frame(minWidth: 340, minHeight: 360)
+        .frame(minWidth: 340, minHeight: 420)
+        .sheet(isPresented: $showingPermissions) {
+            VStack(spacing: 0) {
+                PermissionsView()
+                Divider()
+                HStack {
+                    Spacer()
+                    Button("Done") { showingPermissions = false }
+                        .keyboardShortcut(.defaultAction)
+                }
+                .padding(12)
+            }
+        }
     }
 
     /// CPU-heavy loop — shows up as a hot frame in Time Profiler.

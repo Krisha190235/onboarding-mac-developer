@@ -44,10 +44,17 @@
 	<key>com.apple.security.personal-information.addressbook</key>
 	<true/>
 
+	<!-- 9.8 Display API Data: outgoing connections, for the posts list.
+	     There is no TCC prompt for the network - the sandbox either allows the
+	     connection or it doesn't. Without this key every request fails with
+	     URLError.notConnectedToInternet on a machine that is plainly online,
+	     which is a very convincing way to waste an afternoon. -->
+	<key>com.apple.security.network.client</key>
+	<true/>
+
 	<!--
 	  Deliberately NOT requested, because HelloApp doesn't do these things:
 
-	  com.apple.security.network.client          outgoing connections
 	  com.apple.security.network.server          listening sockets
 	  com.apple.security.files.user-selected.read-write
 	  com.apple.security.files.downloads.read-write

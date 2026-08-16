@@ -14,6 +14,9 @@ struct ContentView: View {
     // Permissions sheet (8.2)
     @State private var showingPermissions = false
 
+    // API list sheet (9.8)
+    @State private var showingPosts = false
+
     var body: some View {
         VStack(spacing: 16) {
             Image(systemName: "ladybug.fill")
@@ -61,6 +64,11 @@ struct ContentView: View {
             Button("Permissions…") {
                 showingPermissions = true
             }
+
+            // --- 9.8 Display API Data ---
+            Button("API Posts…") {
+                showingPosts = true
+            }
         }
         .padding()
         .frame(minWidth: 340, minHeight: 420)
@@ -75,6 +83,19 @@ struct ContentView: View {
                 }
                 .padding(12)
             }
+        }
+        .sheet(isPresented: $showingPosts) {
+            VStack(spacing: 0) {
+                PostsView()
+                Divider()
+                HStack {
+                    Spacer()
+                    Button("Done") { showingPosts = false }
+                        .keyboardShortcut(.defaultAction)
+                }
+                .padding(12)
+            }
+            .frame(minWidth: 880, minHeight: 560)
         }
     }
 

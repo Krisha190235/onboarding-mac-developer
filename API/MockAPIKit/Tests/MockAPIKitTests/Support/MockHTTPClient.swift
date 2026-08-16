@@ -37,6 +37,12 @@ actor MockHTTPClient: HTTPClient {
     private(set) var receivedRequests: [URLRequest] = []
 
     init(_ stubs: Stub...) {
+        self.init(stubs)
+    }
+
+    /// Array form, for a caller that already has a collection — a variadic
+    /// parameter can't be forwarded one.
+    init(_ stubs: [Stub]) {
         self.stubs = stubs.isEmpty ? [Stub.ok("{}")] : stubs
     }
 

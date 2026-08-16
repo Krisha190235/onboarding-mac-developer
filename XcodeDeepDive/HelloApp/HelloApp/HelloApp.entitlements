@@ -34,6 +34,11 @@
 	<key>com.apple.security.device.camera</key>
 	<true/>
 
+	<!-- 8.6 Info.plist Permission Keys: the microphone demo.
+	     Pairs with NSMicrophoneUsageDescription. -->
+	<key>com.apple.security.device.audio-input</key>
+	<true/>
+
 	<!-- 8.2 Permission Request App: the Contacts demo.
 	     Pairs with NSContactsUsageDescription. -->
 	<key>com.apple.security.personal-information.addressbook</key>
@@ -47,7 +52,6 @@
 	  com.apple.security.files.user-selected.read-write
 	  com.apple.security.files.downloads.read-write
 	  com.apple.security.files.bookmarks.app-scope   persistent file access
-	  com.apple.security.device.audio-input      microphone
 	  com.apple.security.personal-information.calendars
 	  com.apple.security.personal-information.location
 	  com.apple.security.print

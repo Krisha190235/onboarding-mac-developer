@@ -1,16 +1,19 @@
-// 8.2 Permission Request App
+// 8.2 Permission Request App / 8.6 Info.plist Permission Keys
 //
-// Requests two TCC-protected permissions — Camera (AVFoundation) and Contacts
-// (Contacts framework) — and shows the full lifecycle for each: current status,
-// the request itself, what to do when the user says no, and proof that the
-// grant actually works.
+// Requests three TCC-protected permissions — Camera and Microphone
+// (AVFoundation) and Contacts (Contacts framework) — and shows the full
+// lifecycle for each: current status, the request itself, what to do when the
+// user says no, and proof that the grant actually works.
 //
 // Requirements that live outside this file:
-//   • Info.plist purpose strings (INFOPLIST_KEY_NSCameraUsageDescription and
-//     INFOPLIST_KEY_NSContactsUsageDescription build settings). Missing one is
-//     a crash, not a denial.
+//   • Info.plist purpose strings, set as build settings because the target
+//     generates its Info.plist: INFOPLIST_KEY_NSCameraUsageDescription,
+//     INFOPLIST_KEY_NSMicrophoneUsageDescription and
+//     INFOPLIST_KEY_NSContactsUsageDescription. Missing one is a crash at the
+//     moment of asking, not a denial.
 //   • Sandbox entitlements in HelloApp.entitlements:
-//     com.apple.security.device.camera and
+//     com.apple.security.device.camera,
+//     com.apple.security.device.audio-input and
 //     com.apple.security.personal-information.addressbook.
 
 import SwiftUI
@@ -79,6 +82,31 @@ enum CameraPermission {
     }
 }
 
+// MARK: - Microphone
+
+enum MicrophonePermission {
+    static var state: PermissionState {
+        switch AVCaptureDevice.authorizationStatus(for: .audio) {
+        case .notDetermined:            return .notDetermined
+        case .authorized:               return .granted
+        case .denied, .restricted:      return .denied
+        @unknown default:               return .unknown
+        }
+    }
+
+    @discardableResult
+    static func request() async -> Bool {
+        await AVCaptureDevice.requestAccess(for: .audio)
+    }
+
+    static func describeDevice() -> String {
+        guard let device = AVCaptureDevice.default(for: .audio) else {
+            return "No audio input device found"
+        }
+        return device.localizedName
+    }
+}
+
 // MARK: - Contacts
 
 enum ContactsPermission {
@@ -124,6 +152,7 @@ enum ContactsPermission {
 /// to the right pane of System Settings.
 enum PrivacyPane: String {
     case camera = "Privacy_Camera"
+    case microphone = "Privacy_Microphone"
     case contacts = "Privacy_Contacts"
 
     func open() {
@@ -137,16 +166,18 @@ enum PrivacyPane: String {
 
 struct PermissionsView: View {
     @State private var cameraState = CameraPermission.state
+    @State private var microphoneState = MicrophonePermission.state
     @State private var contactsState = ContactsPermission.state
     @State private var cameraDetail = ""
+    @State private var microphoneDetail = ""
     @State private var contactsDetail = ""
 
     var body: some View {
         VStack(alignment: .leading, spacing: 20) {
             VStack(alignment: .leading, spacing: 4) {
-                Text("Permissions (8.2)")
+                Text("Permissions (8.2 / 8.6)")
                     .font(.title2)
-                Text("Camera and Contacts are both TCC-protected. macOS only shows an alert the first time — after that, the decision lives in System Settings.")
+                Text("Camera, Microphone and Contacts are all TCC-protected. macOS only shows an alert the first time — after that, the decision lives in System Settings.")
                     .font(.callout)
                     .foregroundStyle(.secondary)
                     .fixedSize(horizontal: false, vertical: true)
@@ -163,6 +194,21 @@ struct PermissionsView: View {
                     cameraDetail = cameraState == .granted ? CameraPermission.describeDevice() : ""
                 },
                 openSettings: { PrivacyPane.camera.open() }
+            )
+
+            Divider()
+
+            PermissionRow(
+                title: "Microphone",
+                subtitle: "AVCaptureDevice.requestAccess(for: .audio)",
+                state: microphoneState,
+                detail: microphoneDetail,
+                request: {
+                    await MicrophonePermission.request()
+                    microphoneState = MicrophonePermission.state
+                    microphoneDetail = microphoneState == .granted ? MicrophonePermission.describeDevice() : ""
+                },
+                openSettings: { PrivacyPane.microphone.open() }
             )
 
             Divider()
@@ -195,8 +241,10 @@ struct PermissionsView: View {
     /// Permissions can change while the app is running — never cache a grant.
     private func refresh() {
         cameraState = CameraPermission.state
+        microphoneState = MicrophonePermission.state
         contactsState = ContactsPermission.state
         cameraDetail = cameraState == .granted ? CameraPermission.describeDevice() : ""
+        microphoneDetail = microphoneState == .granted ? MicrophonePermission.describeDevice() : ""
         contactsDetail = contactsState == .granted ? ContactsPermission.contactCount() : ""
     }
 }

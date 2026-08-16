@@ -345,6 +345,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSCameraUsageDescription = "HelloApp asks for camera access only to demonstrate how macOS permission prompts work. Nothing is recorded.";
 				INFOPLIST_KEY_NSContactsUsageDescription = "HelloApp asks for Contacts access only to count how many contacts it can see, as a permissions demo. Nothing is stored or sent anywhere.";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "HelloApp asks for microphone access only to name the audio input device, as a permissions demo. No audio is captured or recorded.";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -378,6 +379,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSCameraUsageDescription = "HelloApp asks for camera access only to demonstrate how macOS permission prompts work. Nothing is recorded.";
 				INFOPLIST_KEY_NSContactsUsageDescription = "HelloApp asks for Contacts access only to count how many contacts it can see, as a permissions demo. Nothing is stored or sent anywhere.";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "HelloApp asks for microphone access only to name the audio input device, as a permissions demo. No audio is captured or recorded.";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

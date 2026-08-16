@@ -6,6 +6,11 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		0DFFED403026A8AB0077A936 /* CounterKit in Frameworks */ = {isa = PBXBuildFile; productRef = 0DFFED413026A8AB0077A936 /* CounterKit */; };
+		0DFFED423026A8AB0077A936 /* CounterKit in Frameworks */ = {isa = PBXBuildFile; productRef = 0DFFED433026A8AB0077A936 /* CounterKit */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		0DFFED363026A8AB0077A936 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -39,6 +44,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0DFFED403026A8AB0077A936 /* CounterKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -46,6 +52,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0DFFED423026A8AB0077A936 /* CounterKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -90,6 +97,7 @@
 			);
 			name = HelloApp;
 			packageProductDependencies = (
+				0DFFED413026A8AB0077A936 /* CounterKit */,
 			);
 			productName = HelloApp;
 			productReference = 0DFFED153026A8AB0077A936 /* HelloApp.app */;
@@ -113,6 +121,7 @@
 			);
 			name = HelloAppTests;
 			packageProductDependencies = (
+				0DFFED433026A8AB0077A936 /* CounterKit */,
 			);
 			productName = HelloAppTests;
 			productReference = 0DFFED303026A8AB0077A936 /* HelloAppTests.xctest */;
@@ -146,6 +155,9 @@
 			);
 			mainGroup = 0DFFED0C3026A8AB0077A936;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				0DFFED443026A8AB0077A936 /* XCLocalSwiftPackageReference "CounterKit" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 0DFFED163026A8AB0077A936 /* Products */;
 			projectDirPath = "";
@@ -447,6 +459,24 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		0DFFED443026A8AB0077A936 /* XCLocalSwiftPackageReference "CounterKit" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = CounterKit;
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		0DFFED413026A8AB0077A936 /* CounterKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = CounterKit;
+		};
+		0DFFED433026A8AB0077A936 /* CounterKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = CounterKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 0DFFED0D3026A8AB0077A936 /* Project object */;
 }

@@ -1,43 +1,5 @@
 import SwiftUI
-
-// MARK: - Testable logic (7.6 Unit Tests)
-
-/// A tiny value type holding the counter logic, kept separate from the View so
-/// it can be unit-tested without any UI. See HelloAppTests.
-struct Counter {
-    private(set) var count = 0
-    private(set) var history: [Int] = []
-
-    /// count * 2 — a simple computed value used in tests.
-    var doubled: Int { count * 2 }
-
-    /// Increments the count and records the new value in history.
-    mutating func increment() {
-        let next = count + 1
-        history.append(next)
-        count = next
-    }
-
-    /// Resets the counter back to its initial state.
-    mutating func reset() {
-        count = 0
-        history.removeAll()
-    }
-}
-
-/// Pure, testable version of the CPU workload used by the profiling exercise.
-enum Workload {
-    /// Sum of square roots from 1...n. Pure function → easy to unit-test.
-    static func sqrtSum(upTo n: Int) -> Double {
-        var total = 0.0
-        if n >= 1 {
-            for i in 1...n {
-                total += Double(i).squareRoot()
-            }
-        }
-        return total
-    }
-}
+import CounterKit   // 7.7 — local Swift package holding Counter and Workload
 
 // MARK: - View
 

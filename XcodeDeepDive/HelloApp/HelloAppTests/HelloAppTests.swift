@@ -1,8 +1,10 @@
 import Testing
-@testable import HelloApp
+import CounterKit
 
 // 7.6 Unit Tests — Swift Testing
-// Five tests covering the Counter logic and the Workload pure function.
+// Six tests covering the Counter logic and the Workload pure function.
+// 7.7 — Counter and Workload now come from the CounterKit local package, so
+// these exercise the app's dependency through its public API.
 
 @Test("increment increases count by one")
 func incrementIncreasesCount() {
